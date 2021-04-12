@@ -8,12 +8,10 @@ const BROWSER_BASE_URL = 'https://api.jsdelivr.com/v1'
 export default new Vuex.Store({
   state: {
     searchResp: [],
-    searchRespPackDesc: [],
   },
 
   getters: {
-    searchResp: (state) => state.searchResp,
-    searchRespPackDesc: (state) => state.searchRespPackDesc
+    searchResp: (state) => state.searchResp
   },
 
   actions: {
@@ -27,21 +25,11 @@ export default new Vuex.Store({
             });
       }
     },
-    fetchPackDesc({ commit }, pack ){
-      console.log(pack.packName)
-      console.log(pack.packVersion)
-        axios.get(`${BROWSER_BASE_URL}/jsdelivr/libraries?name=${pack.packName}&lastversion=${pack.packVersion}`).then(response => {
-          commit('SET_SEARCHDESCRIPTION', response.data);
-        });
-    }
   },
 
   mutations: {
     SET_SEARCHRESPONSE(state, searchResp) {
       state.searchResp = searchResp;
-    },
-    SET_SEARCHDESCRIPTION(state, searchRespPackDesc) {
-      state.searchRespPackDesc = searchRespPackDesc;
     },
   }
 })
